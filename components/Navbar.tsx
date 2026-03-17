@@ -1,25 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-
-function NavIsotipo() {
-  return (
-    <svg
-      width="36"
-      height="36"
-      viewBox="0 0 64 64"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="nav-isotipo"
-    >
-      <polyline points="4,4 4,60 30,60" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="30" y1="4" x2="30" y2="60" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" />
-      <polyline points="30,4 47,36 64,4" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="64" y1="4" x2="64" y2="60" stroke="currentColor" strokeWidth="4.5" strokeLinecap="square" />
-    </svg>
-  )
-}
 
 const NAV_ITEMS = [
   { num: '01', label: 'Nosotros',          href: '/nosotros' },
@@ -51,8 +34,7 @@ export default function Navbar() {
   return (
     <nav ref={navRef} id="navbar">
       <Link href="/" className="nav-logo" onClick={closeMenu}>
-        <NavIsotipo />
-        <span className="nav-logo-text">Lomeli Morfin</span>
+        <Image src="/logos/lm/LM-Nav.png" alt="Lomeli Morfin" width={160} height={40} className="nav-logo-img" />
       </Link>
 
       {/* Desktop nav */}

@@ -51,7 +51,7 @@ export default function CoberturaPreview() {
             <span className="overline-text">Cobertura</span>
           </div>
 
-          <h2 ref={h2Ref} className="cob-preview-h2">Presencia nacional e internacional</h2>
+          <h2 ref={h2Ref} className="cob-preview-h2 clip-hidden">Presencia nacional e internacional</h2>
 
           <div ref={paisesRef} className="cob-preview-paises">
             {PAISES.map(({ label, sub }, i) => (

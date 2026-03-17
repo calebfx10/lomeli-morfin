@@ -118,7 +118,7 @@ export default function Nosotros() {
         <div className="nosotros-grid">
           {/* Columna texto */}
           <div>
-            <h2 ref={h2Ref} className="nosotros-h2">
+            <h2 ref={h2Ref} className="nosotros-h2 clip-hidden">
               Más de 40 años respaldando tu patrimonio
             </h2>
 

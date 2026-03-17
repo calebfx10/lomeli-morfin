@@ -65,7 +65,7 @@ export default function Clientes() {
           <span className="overline-text">Nuestros Clientes</span>
         </div>
 
-        <h2 ref={h2Ref} className="section-h2">Empresas que confían en nosotros</h2>
+        <h2 ref={h2Ref} className="section-h2 clip-hidden">Empresas que confían en nosotros</h2>
 
         <p className="cl-intro">
           Orgullosos de respaldar a empresas líderes en sus sectores con soluciones afianzadoras a la medida:

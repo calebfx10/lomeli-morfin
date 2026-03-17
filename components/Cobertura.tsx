@@ -82,7 +82,7 @@ export default function Cobertura() {
             <div className="gold-line" />
             <span className="overline-text">Cobertura Nacional e Internacional</span>
           </div>
-          <h2 ref={h2Ref} className="section-h2 cob-h2">Presencia nacional<br />e internacional</h2>
+          <h2 ref={h2Ref} className="section-h2 cob-h2 clip-hidden">Presencia nacional<br />e internacional</h2>
         </div>
 
         {/* Stats en la cabecera */}

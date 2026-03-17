@@ -60,7 +60,7 @@ export default function ServiciosPreview() {
         </div>
 
         <div className="preview-header">
-          <h2 ref={h2Ref} className="section-h2">Soluciones para cada necesidad</h2>
+          <h2 ref={h2Ref} className="section-h2 clip-hidden">Soluciones para cada necesidad</h2>
           <Link href="/servicios" className="btn-outline-dark">
             Ver todos →
           </Link>

@@ -1,20 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 
-function Isotipo({ size = 72 }: { size?: number }) {
-  return (
-    <svg
-      width={size} height={size} viewBox="0 0 64 64"
-      fill="none" xmlns="http://www.w3.org/2000/svg"
-    >
-      <polyline points="4,4 4,60 30,60" stroke="white" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="30" y1="4" x2="30" y2="60" stroke="white" strokeWidth="4.5" strokeLinecap="square" />
-      <polyline points="30,4 47,36 64,4" stroke="white" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="64" y1="4" x2="64" y2="60" stroke="white" strokeWidth="4.5" strokeLinecap="square" />
-    </svg>
-  )
-}
+// Persiste durante navegación SPA, se resetea con cada recarga de página
+let splashShown = false
 
 // Tiempos: 2s fase 1, crossfade 600ms, 4s fase 2, fade out 600ms
 const PHASE1 = 2000
@@ -32,6 +22,13 @@ export default function Splash() {
     const p1 = phase1Ref.current!
     const p2 = phase2Ref.current!
     const site = document.getElementById('site') as HTMLElement
+
+    // Si ya se mostró en esta navegación SPA, omitir splash
+    if (splashShown) {
+      splash.style.display = 'none'
+      site.style.opacity = '1'
+      return
+    }
 
     // Fase 1 → 2: crossfade interno
     const t1 = setTimeout(() => {
@@ -51,6 +48,7 @@ export default function Splash() {
 
     // Fase 2 → sitio: fade out del splash completo
     const t2 = setTimeout(() => {
+      splashShown = true
       splash.style.transition = `opacity ${FADE_OUT}ms ease`
       splash.style.opacity = '0'
       setTimeout(() => {
@@ -63,6 +61,7 @@ export default function Splash() {
     function skip() {
       clearTimeout(t1)
       clearTimeout(t2)
+      splashShown = true
       splash.style.display = 'none'
       site.style.opacity = '1'
     }
@@ -93,7 +92,7 @@ export default function Splash() {
         style={{ display: 'none', opacity: 0 }}
       >
         <div data-anim className="s2-logo">
-          <Isotipo size={96} />
+          <Image src="/logos/lm/Lomeli-Morfin.png" alt="Lomeli Morfin" width={200} height={60} className="s2-logo-img" />
         </div>
         <p data-anim className="s2-name">LOMELI MORFIN</p>
         <div data-anim className="s2-divider" />

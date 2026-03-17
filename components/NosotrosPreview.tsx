@@ -41,7 +41,7 @@ export default function NosotrosPreview() {
 
         <div className="preview-grid">
           <div className="preview-text">
-            <h2 ref={h2Ref} className="section-h2">
+            <h2 ref={h2Ref} className="section-h2 clip-hidden">
               Más de 40 años respaldando tu patrimonio
             </h2>
             <p ref={bodyRef} className="preview-body stagger-child" style={{ '--delay': '0.1s' } as React.CSSProperties}>

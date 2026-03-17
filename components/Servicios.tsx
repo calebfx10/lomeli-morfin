@@ -183,7 +183,7 @@ export default function Servicios() {
             <span className="overline-text">Nuestros Servicios</span>
           </div>
 
-          <h2 ref={h2Ref} className="section-h2">Soluciones para cada necesidad</h2>
+          <h2 ref={h2Ref} className="section-h2 clip-hidden">Soluciones para cada necesidad</h2>
 
           <div ref={gridRef} className="servicios-grid">
             {SERVICIOS.map((srv) => (

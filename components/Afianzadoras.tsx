@@ -65,7 +65,7 @@ export default function Afianzadoras() {
           <span className="overline-text">Nuestro Respaldo</span>
         </div>
 
-        <h2 ref={h2Ref} className="section-h2">
+        <h2 ref={h2Ref} className="section-h2 clip-hidden">
           Respaldados por las mejores afianzadoras
         </h2>
 
