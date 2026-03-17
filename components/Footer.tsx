@@ -1,19 +1,5 @@
+import Image from 'next/image'
 import Link from 'next/link'
-
-function FooterIsotipo() {
-  return (
-    <svg
-      width="32" height="32" viewBox="0 0 64 64"
-      fill="none" xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <polyline points="4,4 4,60 30,60" stroke="white" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="30" y1="4" x2="30" y2="60" stroke="white" strokeWidth="4.5" strokeLinecap="square" />
-      <polyline points="30,4 47,36 64,4" stroke="white" strokeWidth="4.5" strokeLinecap="square" strokeLinejoin="miter" fill="none" />
-      <line x1="64" y1="4" x2="64" y2="60" stroke="white" strokeWidth="4.5" strokeLinecap="square" />
-    </svg>
-  )
-}
 
 const NAV_LINKS = [
   { label: 'Nosotros',  href: '/nosotros'  },
@@ -39,8 +25,7 @@ export default function Footer() {
           {/* Columna 1 — Logo + descripción */}
           <div className="footer-col footer-brand">
             <Link href="/" className="footer-logo-link">
-              <FooterIsotipo />
-              <span className="footer-logo-name">Lomeli Morfin</span>
+              <Image src="/logos/lm/LM-Nav.png" alt="Lomeli Morfin" width={160} height={40} className="footer-logo-img" />
             </Link>
             <p className="footer-desc">
               Organización especializada en Asesoría, Consultoría e Intermediación

@@ -32,7 +32,7 @@ export default function Navbar() {
   function closeMenu() { setMenuOpen(false) }
 
   return (
-    <nav ref={navRef} id="navbar">
+    <nav ref={navRef} id="navbar" className={menuOpen ? 'menu-open' : ''}>
       <Link href="/" className="nav-logo" onClick={closeMenu}>
         <Image src="/logos/lm/LM-Nav.png" alt="Lomeli Morfin" width={160} height={40} className="nav-logo-img" />
       </Link>
