@@ -274,7 +274,7 @@ body {
   flex-shrink: 0;
 }
 .nav-logo-img {
-  height: 100px;
+  height: 52px;
   width: auto;
   filter: brightness(0) invert(1);
   transition: filter 0.35s ease;
