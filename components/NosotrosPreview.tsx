@@ -7,29 +7,28 @@ const VALORES_PREVIEW = ['Innovación', 'Calidad', 'Puntualidad', 'Honestidad', 
 
 export default function NosotrosPreview() {
   const overlineRef = useRef<HTMLDivElement>(null)
-  const h2Ref = useRef<HTMLHeadingElement>(null)
+  const h2Ref       = useRef<HTMLHeadingElement>(null)
+  const bodyRef     = useRef<HTMLParagraphElement>(null)
+  const tagsRef     = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible')
-          obs.unobserve(entry.target)
-        }
-      },
-      { threshold: 0.2 }
-    )
-    if (overlineRef.current) obs.observe(overlineRef.current)
+    const once = (el: Element | null, fn: (el: Element) => void, threshold = 0.2) => {
+      if (!el) return
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { fn(e.target); io.unobserve(e.target) }
+      }, { threshold })
+      io.observe(el)
+      return io
+    }
 
-    const h2Obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) { entry.target.classList.add('reveal-title'); h2Obs.unobserve(entry.target) }
-      },
-      { threshold: 0.3 }
-    )
-    if (h2Ref.current) h2Obs.observe(h2Ref.current)
+    const o1 = once(overlineRef.current, el => el.classList.add('visible'))
+    const o2 = once(h2Ref.current, el => el.classList.add('reveal-title'), 0.3)
+    const o3 = once(bodyRef.current, el => el.classList.add('visible'), 0.3)
+    const o4 = once(tagsRef.current, el => {
+      el.querySelectorAll<HTMLElement>('.stagger-child').forEach(c => c.classList.add('visible'))
+    }, 0.2)
 
-    return () => { obs.disconnect(); h2Obs.disconnect() }
+    return () => { o1?.disconnect(); o2?.disconnect(); o3?.disconnect(); o4?.disconnect() }
   }, [])
 
   return (
@@ -45,9 +44,9 @@ export default function NosotrosPreview() {
             <h2 ref={h2Ref} className="section-h2">
               Más de 40 años respaldando tu patrimonio
             </h2>
-            <p className="preview-body">
+            <p ref={bodyRef} className="preview-body stagger-child" style={{ '--delay': '0.1s' } as React.CSSProperties}>
               Organización especializada en Asesoría, Consultoría e Intermediación de Fianzas,
-              con Cédula de Autorización de la CNSY F (SHCP) desde 1981. Presencia en 14 estados
+              con Cédula de Autorización de la CNSF (SHCP) desde 1981. Presencia en 14 estados
               de México y Argentina.
             </p>
             <Link href="/nosotros" className="btn-primary btn-dark">
@@ -55,9 +54,15 @@ export default function NosotrosPreview() {
             </Link>
           </div>
 
-          <div className="preview-valores">
-            {VALORES_PREVIEW.map((v) => (
-              <span key={v} className="valor-tag">{v}</span>
+          <div ref={tagsRef} className="preview-valores">
+            {VALORES_PREVIEW.map((v, i) => (
+              <span
+                key={v}
+                className="valor-tag stagger-child"
+                style={{ '--delay': `${i * 0.07}s` } as React.CSSProperties}
+              >
+                {v}
+              </span>
             ))}
           </div>
         </div>

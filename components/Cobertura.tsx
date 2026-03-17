@@ -12,6 +12,22 @@ const ESTADOS_NOMBRES = [
   'Mérida', 'Colima', 'Nayarit', 'Morelos', 'Michoacán',
 ]
 
+const COB_STATS = [
+  { id: 'cob-c-states', target: 14, suffix: '',  label: 'Estados en México' },
+  { id: 'cob-c-paises', target: 4,  suffix: '',  label: 'Países' },
+  { id: 'cob-c-years',  target: 40, suffix: '+', label: 'Años de experiencia' },
+]
+
+function animateCounter(el: HTMLElement, target: number, suffix = '', duration = 1500) {
+  const start = performance.now()
+  ;(function step(now: number) {
+    const progress = Math.min((now - start) / duration, 1)
+    const eased = 1 - Math.pow(1 - progress, 3)
+    el.textContent = Math.floor(eased * target) + suffix
+    if (progress < 1) requestAnimationFrame(step)
+  })(performance.now())
+}
+
 const PAISES = [
   { label: 'México',    sub: '14 estados',   color: '#1b4254' },
   { label: 'Argentina', sub: 'Buenos Aires',  color: '#2b5a72' },
@@ -41,7 +57,13 @@ export default function Cobertura() {
 
     const o1 = obs(overlineRef.current, el => el.classList.add('visible'))
     const oh = obs(h2Ref.current, el => el.classList.add('reveal-title'), 0.3)
-    const o2 = obs(statsRef.current, () => setStatsVisible(true), 0.15)
+    const o2 = obs(statsRef.current, () => {
+      setStatsVisible(true)
+      COB_STATS.forEach(({ id, target, suffix }) => {
+        const el = document.getElementById(id)
+        if (el) animateCounter(el, target, suffix)
+      })
+    }, 0.15)
     const o3 = obs(listRef.current, el => {
       setListVisible(true)
       el.querySelectorAll<HTMLElement>('.stagger-child').forEach(c => c.classList.add('visible'))
@@ -65,13 +87,9 @@ export default function Cobertura() {
 
         {/* Stats en la cabecera */}
         <div ref={statsRef} className="cob-stats-strip">
-          {[
-            { num: '14', label: 'Estados en México' },
-            { num: '4',  label: 'Países' },
-            { num: '+40', label: 'Años de experiencia' },
-          ].map(({ num, label }) => (
-            <div key={label} className={`cob-stat-item${statsVisible ? ' visible' : ''}`}>
-              <span className="cob-stat-num">{num}</span>
+          {COB_STATS.map(({ id, target, suffix, label }) => (
+            <div key={id} className={`cob-stat-item${statsVisible ? ' visible' : ''}`}>
+              <span id={id} className="cob-stat-num">{target}{suffix}</span>
               <span className="cob-stat-label">{label}</span>
             </div>
           ))}

@@ -60,8 +60,7 @@ export default function Navbar() {
         {NAV_ITEMS.map(({ num, label, href }) => (
           <li key={num}>
             <Link href={href} className="nav-item nav-link">
-              <span className="nav-num">({num})</span>
-              {label}/
+              {label}
             </Link>
           </li>
         ))}
@@ -89,7 +88,6 @@ export default function Navbar() {
             {NAV_ITEMS.map(({ num, label, href }) => (
               <li key={num}>
                 <Link href={href} className="nav-mobile-link" onClick={closeMenu}>
-                  <span className="nav-num">({num})</span>
                   {label}
                 </Link>
               </li>

@@ -1766,6 +1766,63 @@ a.cf-info-value:hover { color: #c8a020; }
   filter: grayscale(0%) brightness(1) opacity(1);
 }
 
+/* ─── Decorative & scroll animations ─── */
+
+/* Hero — scroll indicator line keyframe */
+@keyframes heroLine { to { height: 120px; } }
+
+/* Hero — scroll indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.hero-scroll-text {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-scroll-line { animation: heroLine 0.8s ease 2s forwards; }
+}
+@media (max-width: 768px) { .hero-scroll-indicator { display: none; } }
+
+
+/* CoberturaPreview — map fade in */
+.cob-preview-map-anim {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s cubic-bezier(0.77, 0, 0.18, 1) 0.2s;
+}
+.cob-preview-map-anim.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ContactoCTA — línea gold decorativa */
+.cta-gold-line {
+  width: 0;
+  height: 2px;
+  background: #c8a020;
+  margin: 0 auto 40px;
+  transition: width 0.9s cubic-bezier(0.77, 0, 0.18, 1);
+}
+.cta-gold-line.visible { width: 80px; }
+
 /* ─── Responsive mobile fixes ─── */
 
 /* PageHeader — menos altura en mobile */

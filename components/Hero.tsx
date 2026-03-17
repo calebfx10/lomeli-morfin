@@ -3,11 +3,23 @@
 import { useEffect, useRef } from 'react'
 
 export default function Hero() {
-  const overlineRef = useRef<HTMLDivElement>(null)
+  const overlineRef  = useRef<HTMLDivElement>(null)
+  const scrollRef    = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const t = setTimeout(() => overlineRef.current?.classList.add('visible'), 300)
-    return () => clearTimeout(t)
+
+    const scrollHandler = () => {
+      if (scrollRef.current) {
+        scrollRef.current.style.opacity = window.scrollY > 80 ? '0' : '1'
+      }
+    }
+    window.addEventListener('scroll', scrollHandler, { passive: true })
+
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('scroll', scrollHandler)
+    }
   }, [])
 
   return (
@@ -39,6 +51,12 @@ export default function Hero() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div ref={scrollRef} className="hero-scroll-indicator">
+        <span className="hero-scroll-text">Scroll</span>
+        <div className="hero-scroll-line" />
       </div>
     </section>
   )

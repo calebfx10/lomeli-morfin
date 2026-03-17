@@ -4,26 +4,30 @@ import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
 export default function ContactoCTA() {
-  const ref = useRef<HTMLDivElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
+  const ref     = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll<HTMLElement>('.stagger-child').forEach(el =>
-            el.classList.add('visible')
-          )
-          obs.unobserve(entry.target)
-        }
-      },
-      { threshold: 0.25 }
-    )
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
+    const once = (el: Element | null, fn: (el: Element) => void, threshold = 0.25) => {
+      if (!el) return
+      const io = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { fn(e.target); io.unobserve(e.target) }
+      }, { threshold })
+      io.observe(el)
+      return io
+    }
+
+    const o1 = once(lineRef.current, el => el.classList.add('visible'), 0.2)
+    const o2 = once(ref.current, el => {
+      el.querySelectorAll<HTMLElement>('.stagger-child').forEach(c => c.classList.add('visible'))
+    }, 0.25)
+
+    return () => { o1?.disconnect(); o2?.disconnect() }
   }, [])
 
   return (
     <section id="contacto-cta">
+      <div ref={lineRef} className="cta-gold-line" />
       <div ref={ref} className="cta-inner">
         <p className="cta-overline stagger-child">¿Listo para comenzar?</p>
         <h2 className="cta-h2 stagger-child">
