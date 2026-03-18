@@ -58,7 +58,7 @@ export default function Afianzadoras() {
   }, [])
 
   return (
-    <section id="afianzadoras" className="section-dark">
+    <section id="afianzadoras">
       <div className="section-container">
         <div ref={overlineRef} className="overline-wrap">
           <div className="gold-line" />

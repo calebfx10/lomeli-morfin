@@ -7,6 +7,7 @@ import ServiciosPreview from '@/components/ServiciosPreview'
 import CoberturaPreview from '@/components/CoberturaPreview'
 import Afianzadoras from '@/components/Afianzadoras'
 import LogosCarousel from '@/components/LogosCarousel'
+import OficinaSection from '@/components/OficinaSection'
 import ContactoCTA from '@/components/ContactoCTA'
 import Footer from '@/components/Footer'
 
@@ -21,6 +22,7 @@ export default function Home() {
         <NosotrosPreview />
         <ServiciosPreview />
         <CoberturaPreview />
+        <OficinaSection />
         <Afianzadoras />
         <LogosCarousel />
         <ContactoCTA />
