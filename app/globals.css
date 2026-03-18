@@ -1889,6 +1889,16 @@ a.cf-info-value:hover { color: #c8a020; }
 
 
 
+/* CoberturaPreview — globe wrap */
+.globe-preview-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 /* CoberturaPreview — map fade in */
 .cob-preview-map-anim {
   opacity: 0;

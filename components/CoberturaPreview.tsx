@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-const CoberturaMapWorld = dynamic(() => import('./CoberturaMapWorld'), { ssr: false })
+const GlobePreview = dynamic(() => import('./GlobePreview'), { ssr: false })
 
 const PAISES = [
   { label: 'México',    sub: '14 estados' },
@@ -14,7 +14,6 @@ const PAISES = [
 ]
 
 export default function CoberturaPreview() {
-  const [hovered, setHovered] = useState<string | null>(null)
   const overlineRef = useRef<HTMLDivElement>(null)
   const h2Ref       = useRef<HTMLHeadingElement>(null)
   const paisesRef   = useRef<HTMLDivElement>(null)
@@ -69,9 +68,9 @@ export default function CoberturaPreview() {
           </div>
         </div>
 
-        {/* Mapa grande centrado */}
+        {/* Globo 3D centrado */}
         <div ref={mapRef} className="cob-preview-map cob-preview-map-anim">
-          <CoberturaMapWorld hoveredId={hovered} onHover={setHovered} />
+          <GlobePreview />
         </div>
 
         {/* Link al pie */}
